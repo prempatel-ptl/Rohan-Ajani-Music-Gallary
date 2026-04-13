@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rohan Ajani — Music</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Tenor+Sans&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0c0b09;
+      --surface: #141210;
+      --gold:    #c9a84c;
+      --gold2:   #7a6230;
+      --cream:   #f0ead8;
+      --muted:   #6b6355;
+      --white:   #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: 'Tenor Sans', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Grain */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 180px; pointer-events: none; z-index: 0; opacity: 0.5;
+    }
+
+    /* ══════════════════════════════════════
+       NAV
+    ══════════════════════════════════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 999;
+      padding: 0 60px;
+      height: 70px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(12,11,9,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.12);
+      transition: background 0.3s;
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 300; letter-spacing: 0.06em;
+      color: var(--cream); text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--muted);
+      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+      transition: color 0.3s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1px; background: var(--gold);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+    /* Hamburger for mobile */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 1.5px;
+      background: var(--cream); transition: all 0.3s;
+    }
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; top: 70px;
+      background: rgba(12,11,9,0.97); z-index: 998;
+      flex-direction: column; align-items: center; justify-content: center; gap: 36px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      text-decoration: none; color: var(--cream);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem; font-weight: 300; letter-spacing: 0.08em;
+      transition: color 0.3s;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ══════════════════════════════════════
+       SECTIONS — shared
+    ══════════════════════════════════════ */
+    section {
+      min-height: 100vh;
+      padding-top: 70px; /* nav offset */
+      position: relative; z-index: 1;
+    }
+
+    .section-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 80px 60px;
+    }
+
+    @media (max-width: 768px) {
+      .section-inner { padding: 60px 24px; }
+    }
+
+    .gold-rule {
+      width: 48px; height: 1px; background: var(--gold);
+      margin-bottom: 20px;
+    }
+    .section-label {
+      font-size: 0.68rem; letter-spacing: 0.35em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300; font-style: italic;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1.1; color: var(--cream);
+      margin-bottom: 32px;
+    }
+
+    /* ══════════════════════════════════════
+       HOME SECTION
+    ══════════════════════════════════════ */
+    #home {
+      display: flex; align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .home-bg {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1600&q=80') center/cover no-repeat;
+      filter: brightness(0.25) saturate(0.6);
+      z-index: 0;
+    }
+    /* diagonal overlay */
+    .home-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(120deg, rgba(12,11,9,0.98) 42%, transparent 100%);
+    }
+
+    .home-content {
+      position: relative; z-index: 1;
+      padding: 0 60px;
+      max-width: 680px;
+      animation: fadeUp 1s ease 0.2s both;
+    }
+
+    @media (max-width: 768px) { .home-content { padding: 0 24px; } }
+
+    .home-eyebrow {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 28px;
+    }
+    .home-eyebrow span {
+      font-size: 0.68rem; letter-spacing: 0.35em;
+      text-transform: uppercase; color: var(--gold);
+    }
+    .home-eyebrow::before {
+      content: ''; width: 36px; height: 1px; background: var(--gold);
+    }
+
+    .home-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 300; line-height: 0.95;
+      letter-spacing: -0.01em; color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .home-name em {
+      font-style: italic; color: var(--gold);
+    }
+
+    .home-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      font-weight: 300; color: var(--muted);
+      letter-spacing: 0.08em; margin-bottom: 40px;
+    }
+
+    .home-desc {
+      font-size: 0.9rem; line-height: 1.9;
+      color: rgba(240,234,216,0.65);
+      max-width: 460px; margin-bottom: 48px;
+    }
+
+    .btn-group { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-block; padding: 14px 36px;
+      background: var(--gold); color: var(--bg);
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-primary:hover { background: #e0bb5a; transform: translateY(-2px); }
+
+    .btn-outline {
+      display: inline-block; padding: 13px 36px;
+      background: none; color: var(--cream);
+      border: 1px solid rgba(201,168,76,0.4);
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+      text-decoration: none; cursor: pointer;
+      transition: border-color 0.25s, color 0.25s, transform 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    /* scroll indicator */
+    .scroll-hint {
+      position: absolute; bottom: 36px; left: 60px;
+      display: flex; align-items: center; gap: 12px;
+      font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--muted); z-index: 1;
+      animation: fadeUp 1s ease 1s both;
+    }
+    .scroll-hint::before {
+      content: ''; width: 1px; height: 40px;
+      background: linear-gradient(to bottom, transparent, var(--gold));
+      animation: scrollPulse 2s ease infinite;
+    }
+    @keyframes scrollPulse {
+      0%,100% { opacity: 0.4; } 50% { opacity: 1; }
+    }
+
+    /* ══════════════════════════════════════
+       ABOUT SECTION
+    ══════════════════════════════════════ */
+    #about { background: var(--surface); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    .about-img-wrap {
+      position: relative;
+      animation: fadeUp 0.8s ease 0.1s both;
+    }
+    .about-img-wrap img {
+      width: 100%; aspect-ratio: 3/4; object-fit: cover;
+      filter: brightness(0.9) saturate(0.8);
+      display: block;
+    }
+    /* gold border offset */
+    .about-img-wrap::before {
+      content: '';
+      position: absolute; top: -16px; left: -16px;
+      right: 16px; bottom: 16px;
+      border: 1px solid rgba(201,168,76,0.25);
+      pointer-events: none; z-index: 0;
+    }
+    .about-img-wrap img { position: relative; z-index: 1; }
+
+    /* floating stat cards */
+    .about-stat {
+      position: absolute; bottom: -20px; right: -20px;
+      background: var(--bg);
+      border: 1px solid rgba(201,168,76,0.2);
+      padding: 20px 28px; z-index: 2;
+    }
+    .about-stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem; font-weight: 300; color: var(--gold);
+      line-height: 1;
+    }
+    .about-stat-label {
+      font-size: 0.65rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .about-text { animation: fadeUp 0.8s ease 0.2s both; }
+
+    .about-body {
+      font-size: 0.95rem; line-height: 2;
+      color: rgba(240,234,216,0.72);
+      margin-bottom: 24px;
+    }
+
+    .skills-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px; margin-top: 36px;
+    }
+    .skill-item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.75rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .skill-item::before {
+      content: ''; width: 20px; height: 1px; background: var(--gold); flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════════════
+       GALLERY SECTION
+    ══════════════════════════════════════ */
+    #gallery { background: var(--bg); }
+
+    .filter-bar {
+      display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 36px;
+    }
+    .filter-btn {
+      background: none; border: 1px solid rgba(201,168,76,0.2);
+      color: var(--muted); font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 8px 20px; cursor: pointer; border-radius: 2px;
+      position: relative; overflow: hidden;
+      transition: color 0.25s, border-color 0.25s;
+    }
+    .filter-btn::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--gold); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.25s ease; z-index: -1;
+    }
+    .filter-btn:hover::before, .filter-btn.active::before { transform: scaleX(1); }
+    .filter-btn:hover, .filter-btn.active { color: var(--bg); border-color: var(--gold); }
+    .filter-btn .count { margin-left: 6px; font-size: 0.6rem; opacity: 0.7; }
+
+    .gallery-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+    }
+    @media (max-width: 900px) { .gallery-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 540px) { .gallery-grid { grid-template-columns: 1fr; } }
+
+    .gallery-item.tall { grid-row: span 2; }
+    .gallery-item {
+      position: relative; overflow: hidden; cursor: pointer;
+      aspect-ratio: 4/3; background: var(--surface);
+      opacity: 0; animation: fadeUp 0.6s ease forwards;
+    }
+    .gallery-item.tall { aspect-ratio: unset; }
+    .gallery-item:nth-child(1){animation-delay:0.05s} .gallery-item:nth-child(2){animation-delay:0.1s}
+    .gallery-item:nth-child(3){animation-delay:0.15s} .gallery-item:nth-child(4){animation-delay:0.2s}
+    .gallery-item:nth-child(5){animation-delay:0.25s} .gallery-item:nth-child(6){animation-delay:0.3s}
+    .gallery-item:nth-child(7){animation-delay:0.35s} .gallery-item:nth-child(8){animation-delay:0.4s}
+    .gallery-item:nth-child(9){animation-delay:0.45s}
+
+    .gallery-item.show-animate { animation: filterReveal 0.35s ease forwards !important; }
+    @keyframes filterReveal { from{opacity:0;transform:scale(0.95)} to{opacity:1;transform:scale(1)} }
+    .gallery-item.hidden { display: none; }
+
+    .gallery-item img {
+      width:100%; height:100%; object-fit:cover; display:block;
+      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.4s;
+      filter: brightness(0.88) saturate(0.85);
+    }
+    .gallery-item:hover img { transform: scale(1.07); filter: brightness(0.55) saturate(0.7); }
+
+    .gallery-overlay {
+      position:absolute; inset:0;
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
+      opacity:0; transition:opacity 0.35s; pointer-events:none;
+    }
+    .gallery-item:hover .gallery-overlay { opacity:1; }
+
+    .overlay-icon {
+      width:44px; height:44px; border:1px solid var(--gold); border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      color:var(--gold); font-size:1.2rem;
+    }
+    .overlay-label { font-size:0.68rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--cream); }
+
+    .gallery-tag {
+      position:absolute; top:12px; right:12px;
+      background:rgba(12,11,9,0.75); border:1px solid rgba(201,168,76,0.3);
+      color:var(--gold); font-size:0.58rem; letter-spacing:0.18em; text-transform:uppercase;
+      padding:4px 10px; backdrop-filter:blur(4px);
+    }
+    .gallery-caption {
+      position:absolute; bottom:0; left:0; right:0;
+      padding:14px 18px;
+      background:linear-gradient(transparent,rgba(0,0,0,0.75));
+      font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase;
+      color:rgba(240,234,216,0.7);
+      transform:translateY(100%); transition:transform 0.35s;
+    }
+    .gallery-item:hover .gallery-caption { transform:translateY(0); }
+    .gallery-item::after {
+      content:''; position:absolute; top:0; left:0; width:28px; height:28px;
+      border-top:1.5px solid var(--gold2); border-left:1.5px solid var(--gold2);
+      opacity:0; transition:opacity 0.3s;
+    }
+    .gallery-item:hover::after { opacity:1; }
+
+    /* ══════════════════════════════════════
+       MUSIC SECTION
+    ══════════════════════════════════════ */
+    #music { background: var(--surface); }
+
+    .music-intro {
+      max-width: 600px; margin-bottom: 60px;
+      font-size: 0.95rem; line-height: 2;
+      color: rgba(240,234,216,0.65);
+    }
+
+    .tracks-list { display: flex; flex-direction: column; gap: 2px; }
+
+    .track {
+      display: grid;
+      grid-template-columns: 48px 1fr auto auto;
+      align-items: center; gap: 20px;
+      padding: 20px 24px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background 0.25s, border-color 0.25s;
+      position: relative; overflow: hidden;
+    }
+    .track::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 2px; background: var(--gold);
+      transform: scaleY(0); transform-origin: bottom;
+      transition: transform 0.3s;
+    }
+    .track:hover { background: rgba(201,168,76,0.05); border-color: rgba(201,168,76,0.15); }
+    .track:hover::before { transform: scaleY(1); }
+
+    .track-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 300; color: var(--muted);
+      text-align: center; transition: color 0.25s;
+    }
+    .track:hover .track-num { color: var(--gold); }
+
+    .track-play {
+      display: none; width: 28px; height: 28px;
+      border: 1px solid var(--gold); border-radius: 50%;
+      align-items: center; justify-content: center;
+      color: var(--gold); font-size: 0.7rem;
+    }
+    .track:hover .track-num-text { display: none; }
+    .track:hover .track-play { display: flex; }
+
+    .track-info {}
+    .track-name {
+      font-size: 0.95rem; color: var(--cream);
+      letter-spacing: 0.04em; margin-bottom: 4px;
+      transition: color 0.25s;
+    }
+    .track:hover .track-name { color: var(--gold); }
+    .track-album {
+      font-size: 0.7rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted);
+    }
+
+    .track-genre {
+      font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted); padding: 4px 12px;
+      border: 1px solid rgba(201,168,76,0.15);
+      white-space: nowrap;
+    }
+
+    .track-duration {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem; color: var(--muted);
+      white-space: nowrap;
+    }
+
+    @media (max-width: 640px) {
+      .track { grid-template-columns: 36px 1fr auto; }
+      .track-genre { display: none; }
+    }
+
+    /* ══════════════════════════════════════
+       CONTACT SECTION
+    ══════════════════════════════════════ */
+    #contact { background: var(--bg); }
+
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start;
+    }
+    @media (max-width: 900px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    .contact-info-block { animation: fadeUp 0.7s ease 0.1s both; }
+
+    .contact-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 300; font-style: italic;
+      color: var(--cream); line-height: 1.3;
+      margin-bottom: 36px;
+    }
+    .contact-tagline em { color: var(--gold); font-style: normal; }
+
+    .contact-detail {
+      display: flex; align-items: flex-start; gap: 16px;
+      margin-bottom: 28px;
+    }
+    .contact-icon {
+      width: 38px; height: 38px; border: 1px solid rgba(201,168,76,0.25);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold); font-size: 0.9rem; flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .contact-detail-label {
+      font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 4px;
+    }
+    .contact-detail-value {
+      font-size: 0.9rem; color: var(--cream); letter-spacing: 0.04em;
+    }
+
+    .social-row { display: flex; gap: 12px; margin-top: 40px; }
+    .social-btn {
+      width: 40px; height: 40px;
+      border: 1px solid rgba(201,168,76,0.2);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 0.85rem; text-decoration: none;
+      transition: border-color 0.25s, color 0.25s, transform 0.2s;
+    }
+    .social-btn:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-3px); }
+
+    /* Contact form */
+    .contact-form { animation: fadeUp 0.7s ease 0.2s both; }
+
+    .form-row { margin-bottom: 20px; }
+    .form-label {
+      display: block; font-size: 0.62rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+    }
+    .form-input, .form-textarea {
+      width: 100%; background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,168,76,0.15);
+      color: var(--cream); font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.9rem; padding: 14px 16px;
+      outline: none; transition: border-color 0.25s, background 0.25s;
+      resize: none;
+    }
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--gold); background: rgba(201,168,76,0.04);
+    }
+    .form-textarea { height: 130px; }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--muted); }
+
+    .form-submit {
+      width: 100%; padding: 16px;
+      background: var(--gold); color: var(--bg);
+      border: none; font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.75rem; letter-spacing: 0.28em; text-transform: uppercase;
+      cursor: pointer; transition: background 0.25s, transform 0.2s;
+      margin-top: 8px;
+    }
+    .form-submit:hover { background: #e0bb5a; transform: translateY(-2px); }
+
+    .form-success {
+      display: none; padding: 16px; border: 1px solid rgba(201,168,76,0.3);
+      color: var(--gold); font-size: 0.8rem; letter-spacing: 0.12em;
+      text-align: center; margin-top: 12px;
+    }
+
+    /* ══════════════════════════════════════
+       LIGHTBOX
+    ══════════════════════════════════════ */
+    #lightbox {
+      display: none; position: fixed; inset: 0; z-index: 9999;
+      background: rgba(8,7,5,0.97); backdrop-filter: blur(6px);
+      align-items: center; justify-content: center; flex-direction: column;
+    }
+    #lightbox.active { display: flex; animation: lbFadeIn 0.3s ease; }
+    @keyframes lbFadeIn { from{opacity:0} to{opacity:1} }
+
+    .lb-img-wrap {
+      position: relative; max-width: min(88vw,900px); max-height: 78vh;
+      display: flex; align-items: center; justify-content: center;
+    }
+    #lb-img {
+      max-width:100%; max-height:78vh; object-fit:contain;
+      border:1px solid rgba(201,168,76,0.18);
+      box-shadow:0 32px 80px rgba(0,0,0,0.7);
+      animation: imgReveal 0.35s ease;
+    }
+    @keyframes imgReveal { from{opacity:0;transform:scale(0.96)} to{opacity:1;transform:scale(1)} }
+
+    .lb-meta {
+      margin-top:18px; text-align:center;
+      font-size:0.72rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted);
+    }
+    .lb-meta strong {
+      color:var(--gold); font-weight:400; font-family:'Cormorant Garamond',serif;
+      font-style:italic; font-size:1.1em; letter-spacing:0.08em;
+    }
+    .lb-cat-badge {
+      display:inline-block; margin-left:10px; padding:2px 10px;
+      border:1px solid rgba(201,168,76,0.35); font-size:0.6rem; letter-spacing:0.2em; color:var(--gold);
+    }
+    .lb-counter { position:absolute; top:-30px; right:0; font-size:0.68rem; letter-spacing:0.2em; color:var(--muted); }
+
+    .lb-btn {
+      position:fixed; top:50%; transform:translateY(-50%);
+      background:none; border:1px solid rgba(201,168,76,0.25); color:var(--gold);
+      width:48px; height:48px; border-radius:50%;
+      cursor:pointer; display:flex; align-items:center; justify-content:center;
+      font-size:1.4rem;
+      transition:background 0.25s,border-color 0.25s,transform 0.2s; z-index:10;
+    }
+    .lb-btn:hover { background:rgba(201,168,76,0.12); border-color:var(--gold); transform:translateY(-50%) scale(1.08); }
+    #lb-prev { left:clamp(12px,3vw,40px); }
+    #lb-next { right:clamp(12px,3vw,40px); }
+
+    #lb-close {
+      position:fixed; top:24px; right:28px;
+      background:none; border:1px solid rgba(201,168,76,0.2); color:var(--cream);
+      width:38px; height:38px; border-radius:50%;
+      cursor:pointer; font-size:1rem;
+      display:flex; align-items:center; justify-content:center;
+      z-index:10; transition:border-color 0.2s,color 0.2s;
+    }
+    #lb-close:hover { border-color:var(--gold); color:var(--gold); }
+
+    .lb-thumbs {
+      position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
+      display:flex; gap:6px; z-index:10; max-width:90vw; flex-wrap:wrap; justify-content:center;
+    }
+    .lb-thumb {
+      width:38px; height:28px; object-fit:cover; opacity:0.35; cursor:pointer;
+      border:1px solid transparent; transition:opacity 0.2s,border-color 0.2s;
+    }
+    .lb-thumb.active,.lb-thumb:hover { opacity:1; border-color:var(--gold); }
+
+    /* ══════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════ */
+    footer {
+      position: relative; z-index: 1;
+      border-top: 1px solid rgba(201,168,76,0.12);
+      padding: 28px 60px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+    }
+    @media (max-width:768px) { footer { padding:24px; flex-direction:column; gap:8px; text-align:center; } }
+
+    /* Shared animation */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAV ══ -->
+  <nav id="navbar">
+    <a href="#home" class="nav-logo">Rohan <span>Ajani</span></a>
+    <ul class="nav-links">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#music">Music</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home"    onclick="closeMobile()">Home</a>
+    <a href="#about"   onclick="closeMobile()">About</a>
+    <a href="#gallery" onclick="closeMobile()">Gallery</a>
+    <a href="#music"   onclick="closeMobile()">Music</a>
+    <a href="#contact" onclick="closeMobile()">Contact</a>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       HOME
+  ══════════════════════════════════════ -->
+  <section id="home">
+    <!-- Replace this src with your own hero background photo -->
+    <div class="home-bg"></div>
+
+    <div class="home-content">
+      <div class="home-eyebrow">
+        <span>Mumbai · India</span>
+      </div>
+      <h1 class="home-name">
+        Rohan<br><em>Ajani</em>
+      </h1>
+      <p class="home-subtitle">Music Gallery &amp; Portfolio</p>
+      <p class="home-desc">
+        A journey through sound, performance, and passion.
+        Classical roots, contemporary soul — every note tells a story.
+      </p>
+      <div class="btn-group">
+        <a href="#gallery" class="btn-primary">View Gallery</a>
+        <a href="#music"   class="btn-outline">Listen Now</a>
+      </div>
+    </div>
+
+    <div class="scroll-hint">Scroll to explore</div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       ABOUT
+  ══════════════════════════════════════ -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+
+        <div class="about-img-wrap">
+          <!-- ✏️ Replace src with your own portrait photo e.g. src="images/rohan-portrait.jpg" -->
+          <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&q=80" alt="Rohan Ajani"/>
+          <div class="about-stat">
+            <div class="about-stat-num">10+</div>
+            <div class="about-stat-label">Years of Music</div>
+          </div>
+        </div>
+
+        <div class="about-text">
+          <div class="gold-rule"></div>
+          <p class="section-label">About Me</p>
+          <h2 class="section-title">Rohan Ajani</h2>
+
+          <p class="about-body">
+            <!-- ✏️ Replace this with your own bio -->
+            Rohan Ajani is a Mumbai-based musician, composer, and performer
+            with over a decade of experience in classical and contemporary music.
+            His work bridges the gap between traditional Indian classical forms
+            and modern acoustic expression.
+          </p>
+          <p class="about-body">
+            Having performed at venues across India — from intimate recitals
+            in Pune to large stage concerts in Delhi and Chennai — Rohan brings
+            a distinctive voice and a deep respect for the craft to every performance.
+          </p>
+
+          <div class="skills-grid">
+            <div class="skill-item">Hindustani Classical</div>
+            <div class="skill-item">Guitar &amp; Composition</div>
+            <div class="skill-item">Live Performance</div>
+            <div class="skill-item">Studio Recording</div>
+            <div class="skill-item">Music Direction</div>
+            <div class="skill-item">Carnatic Vocals</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       GALLERY
+  ══════════════════════════════════════ -->
+  <section id="gallery">
+    <div class="section-inner">
+      <div class="gold-rule"></div>
+      <p class="section-label">Photography</p>
+      <h2 class="section-title">Moments &amp; Memories</h2>
+
+      <!-- Filter tabs -->
+      <div class="filter-bar" id="filterBar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="concerts">Concerts</button>
+        <button class="filter-btn" data-filter="studio">Studio</button>
+        <button class="filter-btn" data-filter="portraits">Portraits</button>
+        <button class="filter-btn" data-filter="backstage">Backstage</button>
+      </div>
+
+      <!-- ✏️ HOW TO ADD IMAGES:
+           1. Upload your photo to images/ folder on GitHub
+           2. Copy one of the blocks below
+           3. Change src="images/YOUR-PHOTO.jpg"
+           4. Change data-category to: concerts | studio | portraits | backstage
+           5. Change data-title and gallery-caption text
+           6. Save and commit
+      -->
+      <div class="gallery-grid" id="galleryGrid">
+
+        <div class="gallery-item tall" data-category="concerts" data-title="On Stage · Mumbai 2023">
+          <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80" alt="On Stage"/>
+          <div class="gallery-overlay"><div class="overlay-icon">+</div><span class="overlay-label">View</span></div>
+          <div class="gallery-tag">Concerts</div>
+          <div class="gallery-caption">On Stage · Mumbai 2023</div>
+        </div>
+
+        <div class="gallery-item" data-category="studio" data-title="Rehearsal · Evening Light">
+          <img src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=800&q=80" alt="Rehearsal"/>
+          <div class="gallery-overlay"><div class="overlay-icon">+</div><span class="overlay-label">View</span></div>
+          <div class="gallery-tag">Studio</div>
+          <div class="gallery-caption">Rehearsal · Evening Light</div>
+        </div>
+
+        <div class="gallery-item" data-category="concerts" data-title="Classical Concert · Pune">
+          <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80" alt="Classical Concert"/>
+          <div class="gallery-overlay"><div class="overlay-icon">+</div><span class="overlay-label">View</span></div>
+          <div class="gallery-tag">Concerts</div>
+          <div class="gallery-caption">Classical Concert · Pune</div>
+        </div>
+
+        <div class="gallery-item" data-category="studio" data-title="Studio Session">
+          <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=800&q=80" alt="Studio Session"/>
+          <div class="gallery-overlay"><div class="overlay-icon">+</div><span class="overlay-label">View</span></div>
+          <div class="gallery-tag">Studio</div>
+          <div class="gallery-caption">Studio Session</div>
+        </div>
+
+        <div class="gallery-item" data-category="backstage" data-title="Backstage · Delhi">
+          <img src="https://images.unsplash.com/photo-1468359601543-843bfaef291a?w=800&q=80" alt="Backstage"/>
+          <div class="gallery-overlay"><div class="overlay-icon">+</div><span class="overlay-label">View</span></div>
+          <div class="gallery-tag">Backstage</div>
+          <div class="gallery-caption">Backstage · Delhi</div>
+        </div>
+
+        <div class="gallery-item tall" data-category="portraits" data-title="Portrait · 2024">
+          <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&q=80" alt="Portrait"/>
+          <div class="gallery-overlay"><div class="overlay-icon">+</div><span class="overlay-label">View</span></div>
+          <div class="gallery-tag">Portraits</div>
+          <div class="gallery-caption">Portrait · 2024</div>
+        </div>
+
+        <div class="gallery-item" data-category="concerts" data-title="Live Performance">
+          <img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=800&q=80" alt="Live Performance"/>
+          <div class="gallery-overlay"><div class="overlay-icon">+</div><span class="overlay-label">View</span></div>
+          <div class="gallery-tag">Concerts</div>
+          <div class="gallery-caption">Live Performance</div>
+        </div>
+
+        <div class="gallery-item" data-category="concerts" data-title="Carnatic Recital">
+          <img src="https://images.unsplash.com/photo-1541534401786-2077eed87a74?w=800&q=80" alt="Carnatic Recital"/>
+          <div class="gallery-overlay"><div class="overlay-icon">+</div><span class="overlay-label">View</span></div>
+          <div class="gallery-tag">Concerts</div>
+          <div class="gallery-caption">Carnatic Recital</div>
+        </div>
+
+        <div class="gallery-item" data-category="backstage" data-title="Outdoor Festival">
+          <img src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=800&q=80" alt="Outdoor Festival"/>
+          <div class="gallery-overlay"><div class="overlay-icon">+</div><span class="overlay-label">View</span></div>
+          <div class="gallery-tag">Backstage</div>
+          <div class="gallery-caption">Outdoor Festival</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       MUSIC
+  ══════════════════════════════════════ -->
+  <section id="music">
+    <div class="section-inner">
+      <div class="gold-rule"></div>
+      <p class="section-label">Discography</p>
+      <h2 class="section-title">My Music</h2>
+      <p class="music-intro">
+        A collection of original compositions, live recordings, and collaborations.
+        <!-- ✏️ Update this text to describe your music -->
+      </p>
+
+      <!-- ✏️ HOW TO ADD A TRACK:
+           Copy one .track block, change the name, album, genre, duration.
+           To link to a real song: change href="#" to your YouTube / Spotify / SoundCloud link -->
+      <div class="tracks-list">
+
+        <div class="track" onclick="window.open('#','_blank')">
+          <div class="track-num">
+            <span class="track-num-text">01</span>
+            <span class="track-play">▶</span>
+          </div>
+          <div class="track-info">
+            <div class="track-name">Raga at Dawn</div>
+            <div class="track-album">Morning Ragas Vol. 1 · 2023</div>
+          </div>
+          <div class="track-genre">Classical</div>
+          <div class="track-duration">4:32</div>
+        </div>
+
+        <div class="track" onclick="window.open('#','_blank')">
+          <div class="track-num">
+            <span class="track-num-text">02</span>
+            <span class="track-play">▶</span>
+          </div>
+          <div class="track-info">
+            <div class="track-name">Mumbai Nights</div>
+            <div class="track-album">City Sessions · 2023</div>
+          </div>
+          <div class="track-genre">Fusion</div>
+          <div class="track-duration">3:18</div>
+        </div>
+
+        <div class="track" onclick="window.open('#','_blank')">
+          <div class="track-num">
+            <span class="track-num-text">03</span>
+            <span class="track-play">▶</span>
+          </div>
+          <div class="track-info">
+            <div class="track-name">Monsoon Strings</div>
+            <div class="track-album">Acoustic Tales · 2022</div>
+          </div>
+          <div class="track-genre">Acoustic</div>
+          <div class="track-duration">5:07</div>
+        </div>
+
+        <div class="track" onclick="window.open('#','_blank')">
+          <div class="track-num">
+            <span class="track-num-text">04</span>
+            <span class="track-play">▶</span>
+          </div>
+          <div class="track-info">
+            <div class="track-name">Tansen's Echo</div>
+            <div class="track-album">Tribute Series · 2022</div>
+          </div>
+          <div class="track-genre">Classical</div>
+          <div class="track-duration">6:44</div>
+        </div>
+
+        <div class="track" onclick="window.open('#','_blank')">
+          <div class="track-num">
+            <span class="track-num-text">05</span>
+            <span class="track-play">▶</span>
+          </div>
+          <div class="track-info">
+            <div class="track-name">Desert Highway</div>
+            <div class="track-album">Crossroads EP · 2021</div>
+          </div>
+          <div class="track-genre">Fusion</div>
+          <div class="track-duration">3:55</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       CONTACT
+  ══════════════════════════════════════ -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="gold-rule"></div>
+      <p class="section-label">Get In Touch</p>
+      <h2 class="section-title">Contact</h2>
+
+      <div class="contact-grid">
+
+        <div class="contact-info-block">
+          <p class="contact-tagline">
+            Bookings, collaborations,<br>or just to say <em>hello</em>.
+          </p>
+
+          <!-- ✏️ Replace with your real contact details -->
+          <div class="contact-detail">
+            <div class="contact-icon">✉</div>
+            <div>
+              <div class="contact-detail-label">Email</div>
+              <div class="contact-detail-value">rohan@example.com</div>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-icon">☎</div>
+            <div>
+              <div class="contact-detail-label">Phone</div>
+              <div class="contact-detail-value">+91 98765 43210</div>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-icon">◎</div>
+            <div>
+              <div class="contact-detail-label">Location</div>
+              <div class="contact-detail-value">Mumbai, Maharashtra, India</div>
+            </div>
+          </div>
+
+          <!-- ✏️ Replace # with your real social media links -->
+          <div class="social-row">
+            <a href="#" class="social-btn" title="Instagram">in</a>
+            <a href="#" class="social-btn" title="YouTube">▶</a>
+            <a href="#" class="social-btn" title="Spotify">♪</a>
+            <a href="#" class="social-btn" title="Facebook">f</a>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <div class="form-row">
+            <label class="form-label">Your Name</label>
+            <input class="form-input" type="text" placeholder="Rahul Sharma" id="fname"/>
+          </div>
+          <div class="form-row">
+            <label class="form-label">Email Address</label>
+            <input class="form-input" type="email" placeholder="rahul@example.com" id="femail"/>
+          </div>
+          <div class="form-row">
+            <label class="form-label">Subject</label>
+            <input class="form-input" type="text" placeholder="Concert Booking / Collaboration" id="fsubject"/>
+          </div>
+          <div class="form-row">
+            <label class="form-label">Message</label>
+            <textarea class="form-textarea" placeholder="Write your message here..." id="fmessage"></textarea>
+          </div>
+          <button class="form-submit" onclick="submitForm()">Send Message</button>
+          <div class="form-success" id="formSuccess">
+            ✓ &nbsp; Message sent! Rohan will get back to you soon.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       LIGHTBOX
+  ══════════════════════════════════════ -->
+  <div id="lightbox">
+    <button id="lb-close">✕</button>
+    <button class="lb-btn" id="lb-prev">&#8249;</button>
+    <div class="lb-img-wrap">
+      <span class="lb-counter" id="lb-counter"></span>
+      <img id="lb-img" src="" alt=""/>
+    </div>
+    <div class="lb-meta" id="lb-meta"></div>
+    <button class="lb-btn" id="lb-next">&#8250;</button>
+    <div class="lb-thumbs" id="lb-thumbs"></div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2024 Rohan Ajani Music Gallery</span>
+    <span>Mumbai, India</span>
+  </footer>
+
+  <script>
+    // ══ NAV active link on scroll ══
+    const sections  = document.querySelectorAll('section[id]');
+    const navLinks  = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 120) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    });
+
+    // ══ Hamburger menu ══
+    const ham = document.getElementById('hamburger');
+    const mob = document.getElementById('mobileMenu');
+    ham.addEventListener('click', () => mob.classList.toggle('open'));
+    function closeMobile() { mob.classList.remove('open'); }
+
+    // ══ Contact form fake submit ══
+    function submitForm() {
+      const name = document.getElementById('fname').value.trim();
+      const email = document.getElementById('femail').value.trim();
+      if (!name || !email) { alert('Please fill in your name and email.'); return; }
+      document.getElementById('formSuccess').style.display = 'block';
+      ['fname','femail','fsubject','fmessage'].forEach(id => document.getElementById(id).value = '');
+      setTimeout(() => document.getElementById('formSuccess').style.display = 'none', 4000);
+    }
+
+    // ══ Filter tabs ══
+    const allItems   = Array.from(document.querySelectorAll('.gallery-item'));
+    const filterBtns = Array.from(document.querySelectorAll('.filter-btn'));
+
+    filterBtns.forEach(btn => {
+      const f = btn.dataset.filter;
+      const n = f === 'all' ? allItems.length : allItems.filter(i => i.dataset.category === f).length;
+      btn.innerHTML += `<span class="count">${n}</span>`;
+    });
+
+    function applyFilter(filter) {
+      filterBtns.forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
+      let delay = 0;
+      allItems.forEach(item => {
+        const match = filter === 'all' || item.dataset.category === filter;
+        if (match) {
+          item.classList.remove('hidden');
+          item.classList.remove('show-animate');
+          void item.offsetWidth;
+          item.style.animationDelay = `${delay}s`;
+          item.classList.add('show-animate');
+          delay += 0.05;
+        } else {
+          item.classList.add('hidden');
+          item.classList.remove('show-animate');
+        }
+      });
+    }
+    filterBtns.forEach(btn => btn.addEventListener('click', () => applyFilter(btn.dataset.filter)));
+
+    // ══ Lightbox ══
+    const lightbox  = document.getElementById('lightbox');
+    const lbImg     = document.getElementById('lb-img');
+    const lbMeta    = document.getElementById('lb-meta');
+    const lbCounter = document.getElementById('lb-counter');
+    const lbThumbs  = document.getElementById('lb-thumbs');
+    let visibleImages = [], current = 0;
+
+    function buildVisibleList() {
+      visibleImages = allItems.filter(i => !i.classList.contains('hidden')).map(i => ({
+        src: i.querySelector('img').src, alt: i.querySelector('img').alt,
+        title: i.dataset.title || '', category: i.dataset.category || ''
+      }));
+      lbThumbs.innerHTML = '';
+      visibleImages.forEach((img, i) => {
+        const t = document.createElement('img');
+        t.src = img.src; t.alt = img.alt; t.className = 'lb-thumb';
+        t.addEventListener('click', e => { e.stopPropagation(); showImage(i); });
+        lbThumbs.appendChild(t);
+      });
+    }
+
+    function updateThumbs() {
+      document.querySelectorAll('.lb-thumb').forEach((t,i) => t.classList.toggle('active', i===current));
+    }
+
+    function showImage(index) {
+      current = index;
+      const img = visibleImages[index];
+      lbImg.style.animation = 'none'; void lbImg.offsetWidth; lbImg.style.animation = '';
+      lbImg.src = img.src; lbImg.alt = img.alt;
+      lbMeta.innerHTML = `<strong>${img.title}</strong><span class="lb-cat-badge">${img.category}</span>`;
+      lbCounter.textContent = `${index+1} / ${visibleImages.length}`;
+      updateThumbs();
+    }
+
+    function openLightbox(item) {
+      buildVisibleList();
+      const vis = allItems.filter(i => !i.classList.contains('hidden'));
+      current = Math.max(0, vis.indexOf(item));
+      showImage(current);
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() { lightbox.classList.remove('active'); document.body.style.overflow = ''; }
+
+    allItems.forEach(item => item.addEventListener('click', () => { if (!item.classList.contains('hidden')) openLightbox(item); }));
+    document.getElementById('lb-close').addEventListener('click', closeLightbox);
+    document.getElementById('lb-prev').addEventListener('click', e => { e.stopPropagation(); showImage((current-1+visibleImages.length)%visibleImages.length); });
+    document.getElementById('lb-next').addEventListener('click', e => { e.stopPropagation(); showImage((current+1)%visibleImages.length); });
+    lightbox.addEventListener('click', e => { if (e.target===lightbox) closeLightbox(); });
+
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key==='Escape') closeLightbox();
+      if (e.key==='ArrowRight') showImage((current+1)%visibleImages.length);
+      if (e.key==='ArrowLeft')  showImage((current-1+visibleImages.length)%visibleImages.length);
+    });
+
+    let tx = 0;
+    lightbox.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+    lightbox.addEventListener('touchend',   e => {
+      const d = tx - e.changedTouches[0].clientX;
+      if (Math.abs(d)>50) showImage(d>0 ? (current+1)%visibleImages.length : (current-1+visibleImages.length)%visibleImages.length);
+    });
+  </script>
+</body>
+</html>
